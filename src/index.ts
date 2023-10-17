@@ -105,7 +105,7 @@ export default function enhanceLogPlugin(options: Options = {}): PluginOption {
 
   function generateLineOfTip(relativeFilename: string, lineNumber: number) {
     if (enableTitle) {
-      return `${relativeFilename ? "" : `${lineNumber}:`}${preTip}`;
+      return `${relativeFilename ? "" : `${lineNumber}`}${preTip}`;
     }
     return "";
   }
