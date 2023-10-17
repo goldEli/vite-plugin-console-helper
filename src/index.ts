@@ -1,6 +1,6 @@
-import _traverse from "@babel/traverse";
+import traverse from "@babel/traverse";
 import { parse } from "@babel/parser";
-import _generate from "@babel/generator";
+import generate from "@babel/generator";
 import type { PluginOption } from "vite";
 import { createFilter } from "vite";
 import type { StringLiteral } from "@babel/types";
@@ -8,9 +8,9 @@ import { SourceMapConsumer } from "source-map";
 import type { RawSourceMap } from "source-map";
 
 // @ts-ignore
-const traverse = _traverse?.default;
+// const traverse = _traverse?.default;
 // @ts-ignore
-const generate = _generate?.default;
+// const generate = _generate?.default;
 
 function stringLiteral(value: string) {
   const stringLiteralNode: StringLiteral = {
