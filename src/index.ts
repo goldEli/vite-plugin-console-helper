@@ -58,6 +58,7 @@ export interface Options {
   splitBy?: string;
   /** need endLine, default false, only if startLine unequal endLine */
   endLine?: boolean;
+  enableTitle?: boolean;
 }
 
 // const colorGreen = '\x1B[32m'
@@ -93,6 +94,7 @@ export default function enhanceLogPlugin(options: Options = {}): PluginOption {
     splitBy = "",
     enableFileName = true,
     endLine: enableEndLine = false,
+    enableTitle = true,
   } = options;
   const splitNode = generateStrNode(splitBy);
   let root = "";
@@ -102,7 +104,10 @@ export default function enhanceLogPlugin(options: Options = {}): PluginOption {
   );
 
   function generateLineOfTip(relativeFilename: string, lineNumber: number) {
-    return `${relativeFilename ? "" : `line of ${lineNumber} `}${preTip}`;
+    if (enableTitle) {
+      return `${relativeFilename ? "" : `${lineNumber}:`}${preTip}`;
+    }
+    return "";
   }
   return {
     name: "console-helper",
@@ -121,7 +126,6 @@ export default function enhanceLogPlugin(options: Options = {}): PluginOption {
         rawSourcemap as RawSourceMap
       );
       if (!traverse) return;
-      console.log(typeof traverse, {}.toString.call(traverse));
 
       traverse(ast, {
         CallExpression(path: any) {
@@ -175,11 +179,14 @@ export default function enhanceLogPlugin(options: Options = {}): PluginOption {
                 )
                   relativeFilename = relativeFilename.replace(/.*\//, "");
               }
+              const title = generateLineOfTip(relativeFilename, startLine!);
               const startLineTipNode = stringLiteral(
-                `${generateLineOfTip(
-                  relativeFilename,
-                  startLine!
-                )}${handleFileNameTip(relativeFilename, startLine!)}\n`
+                title
+                  ? `${title}${handleFileNameTip(
+                      relativeFilename,
+                      startLine!
+                    )}\n`
+                  : ""
               );
               nodeArguments.unshift(startLineTipNode);
               if (enableEndLine) {
