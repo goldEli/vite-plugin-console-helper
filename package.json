@@ -1,0 +1,19 @@
+{
+  "name": "vite-plugin-console-helper",
+  "version": "1.0.0",
+  "description": "a vite plugin for console",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vite",
+    "console"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11"
+  }
+}
