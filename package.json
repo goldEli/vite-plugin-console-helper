@@ -4,7 +4,11 @@
   "description": "a vite plugin for console",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf dist",
+    "build": "unbuild",
+    "prepublishOnly": "npm run clean && npm run build",
+    "release": "npm publish",
+    "test:react": "pnpm -C test/react dev"
   },
   "keywords": [
     "vite",
@@ -13,7 +17,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/generator": "^7.23.0",
+    "@babel/parser": "^7.23.0",
+    "@babel/traverse": "^7.23.2",
+    "@babel/types": "^7.23.0",
+    "@types/babel__generator": "^7.6.5",
+    "@types/babel__traverse": "^7.20.2",
+    "source-map": "^0.7.4",
     "typescript": "^5.2.2",
     "vite": "^4.4.11"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }
