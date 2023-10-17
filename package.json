@@ -2,7 +2,12 @@
   "name": "vite-plugin-console-helper",
   "version": "1.0.0",
   "description": "a vite plugin for console",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "clean": "rm -rf dist",
     "build": "unbuild",
@@ -25,6 +30,7 @@
     "@types/babel__traverse": "^7.20.2",
     "source-map": "^0.7.4",
     "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
     "vite": "^4.4.11"
   },
   "publishConfig": {

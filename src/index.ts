@@ -7,8 +7,10 @@ import type { StringLiteral } from "@babel/types";
 import { SourceMapConsumer } from "source-map";
 import type { RawSourceMap } from "source-map";
 
+// @ts-ignore
 const traverse = _traverse?.default;
-const generate = _generate?.default
+// @ts-ignore
+const generate = _generate?.default;
 
 function stringLiteral(value: string) {
   const stringLiteralNode: StringLiteral = {
@@ -119,10 +121,10 @@ export default function enhanceLogPlugin(options: Options = {}): PluginOption {
         rawSourcemap as RawSourceMap
       );
       if (!traverse) return;
-      console.log(typeof traverse, {}.toString.call(traverse))
+      console.log(typeof traverse, {}.toString.call(traverse));
 
       traverse(ast, {
-        CallExpression(path) {
+        CallExpression(path: any) {
           const calleeCode = generate(path.node.callee).code;
           if (calleeCode === "console.log") {
             const nodeArguments = path.node.arguments;
